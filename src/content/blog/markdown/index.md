@@ -34,6 +34,10 @@ Header previews would disrupt the structure of the article, so they are not disp
 _Italic text_ and **Bold text**, together will be **_Bold Italic text_**
 ```
 
+```markdown
+_Italic text_ and **Bold text**, together will be **_Bold Italic text_**
+```
+
 Preview:
 
 _Italic text_ and **Bold text**, together will be **_Bold Italic text_**
