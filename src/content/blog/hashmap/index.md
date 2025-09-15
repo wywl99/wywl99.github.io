@@ -227,7 +227,7 @@ HashTable 之所以是线程安全的原因也很简单粗暴，它的所有方�
 
 这样做的好处在于简单粗暴的就解决了线程安全问题，但是缺点也很明显，锁的粒度太大导致性能过低。
 
-其实方法里面很多代码是可以支持并发执行的，我们只要保证需要同步的地方同步，不需要同步的地方就让他并发执行。所以 HashTable 一般是不会在代码中使用的。我们可以使用性能更高的 **ConCurrentHashMap**
+     private void doReleaseShared() {        //自旋        for (;;) {            Node h = head;            if (h != null && h != tail) {                int ws = h.waitStatus;                if (ws == Node.SIGNAL) {                    if (!h.compareAndSetWaitStatus(Node.SIGNAL, 0))                        continue;            // loop to recheck cases                    unparkSuccessor(h); //唤醒下一个节点                }                else if (ws == 0 &&                         !h.compareAndSetWaitStatus(0, Node.PROPAGATE))                    continue;                // loop on failed CAS            }            if (h == head)                   // loop if head changed                break;        }    }java
 
 
 
